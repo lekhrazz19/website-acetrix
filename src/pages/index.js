@@ -6,13 +6,13 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Landing from "@/components/home/Landing";
 import About from "@/components/home/About";
-import Founders from "@/components/home/Founders";
-import Team from "@/components/home/Team";
 import Footer from "@/components/Footer";
+import Battlegrounds from "@/components/home/Battlegrounds";
 import Contact from "@/components/home/Contact";
 import Events from "@/components/home/Events";
-import LoadingAnimation from "@/components/Loading";
-import { getEvents, getFounders } from "@/lib/appwrite";
+// import LoadingAnimation from "@/components/Loading";
+import FloatingIcons from "@/components/FloatingIcons";
+import { getEvents } from "@/lib/appwrite";
 import { useMyContext } from "@/context";
 
 export default function Home({ eventsArr }) {
@@ -43,10 +43,10 @@ export default function Home({ eventsArr }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
+      <FloatingIcons />
       <Landing />
       <About />
-      <Founders />
-      <Team />
+      <Battlegrounds />
       <Events />
       <Contact />
       <Footer />

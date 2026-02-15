@@ -1,60 +1,82 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { CallToAction } from "../buttons";
 import Image from "next/image";
 import styles from "../../styles/home/about.module.scss";
 import { SectionWrapper } from "@/hoc";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { fadeIn, slideIn, textVariant, zoomIn } from "@/utils/motion";
+import { FaCrosshairs, FaTrophy, FaGamepad, FaUsers } from "react-icons/fa";
 
 const About = () => {
   return (
     <div className={styles.aboutPage}>
-      {/* image box */}
-      <motion.div variants={zoomIn(0.1, 1.25)} className={styles.imageBox}>
-        <Image
-          src={"/images/about-us-image.png"}
-          alt="acetrix"
-          width={500}
-          height={500}
-          className={styles.aboutImage}
-        />
-      </motion.div>
+      {/* Industrial Background Grid */}
+      <div className={styles.bgGrid} />
 
-      <motion.div variants={textVariant(0.2, 1.5)} className={styles.content}>
-        <h2>About Us</h2>
+      <div className={styles.container}>
+        {/* Left: Image with Industrial Frame */}
+        <motion.div variants={fadeIn("right", "spring", 0.5, 0.75)} className={styles.imageBox}>
+          <div className={styles.frameCornerTopLeft} />
+          <div className={styles.frameCornerBottomRight} />
 
-        <p>
-          Welcome to Acetrix, Founded by passionate gamers, we unite the campus with epic 
-          events collaborate with IGDC, host game jams. Whether you're a pro or just love gaming, 
-          Acetrix has something for you!
-        </p>
+          <div className={styles.imageFrame}>
+            <Image
+              src={"/images/about-us-image.png"}
+              alt="acetrix team"
+              width={600}
+              height={600}
+              className={styles.aboutImage}
+            />
+          </div>
 
-        <div className={styles.cta}>
-          <CallToAction href="https://discord.com/invite/kCVCtEVs4f">
-            Learn More
-          </CallToAction>
 
-          <Image
-            src={"/images/logo.png"}
-            alt="acetrix logo"
-            width={200}
-            height={200}
-            className={styles.logo}
-          />
-        </div>
-      </motion.div>
-      <motion.div
-        variants={slideIn("right", "tween", 0.1, 0.75)}
-        className={styles.filledCircle}
-      ></motion.div>
-      <motion.div
-        variants={slideIn("left", "tween", 0.1 * 2, 0.75)}
-        className={styles.outlineCircle}
-      ></motion.div>
-      <motion.div
-        variants={slideIn("right", "tween", 0.1 * 3, 0.75)}
-        className={styles.filledRectangle}
-      ></motion.div>
+        </motion.div>
+
+        {/* Right: Content */}
+        <motion.div variants={fadeIn("left", "spring", 0.5, 0.75)} className={styles.content}>
+          <div className={styles.sectionHeader}>
+            <span className={styles.headerLine} />
+            <h2 className={styles.sectionTitle}>WHO WE ARE</h2>
+            <span className={styles.headerLine} />
+          </div>
+
+          <h3 className={styles.brandTitle}>
+            ACETRIX
+          </h3>
+
+          <div className={styles.descriptionBox}>
+            <p>
+              Founded by passionate gamers, Acetrix is the premier gaming club on campus.
+              We unite players through high-stakes tournaments, collaborate with industry leaders like IGDC,
+              and host game jams that push creative boundaries.
+            </p>
+          </div>
+
+          <div className={styles.statsGrid}>
+            <div className={styles.statItem}>
+              <FaTrophy className={styles.statIcon} />
+              <span className={styles.statValue}>15+</span>
+              <span className={styles.statLabel}>TOURNAMENTS</span>
+            </div>
+            <div className={styles.statItem}>
+              <FaGamepad className={styles.statIcon} />
+              <span className={styles.statValue}>₹50K+</span>
+              <span className={styles.statLabel}>PRIZES REWARDED</span>
+            </div>
+            <div className={styles.statItem}>
+              <FaUsers className={styles.statIcon} />
+              <span className={styles.statValue}>500+</span>
+              <span className={styles.statLabel}>COMMUNITY</span>
+            </div>
+          </div>
+
+          <div className={styles.ctaWrapper}>
+            <CallToAction href="https://docs.google.com/forms/d/e/1FAIpQLSfmEi6SuiXLPwNS8ekWiy7vMuXfH8tvOYvAOQFgQAM_uNH1iA/viewform?usp=header">
+              JOIN THE SQUAD
+            </CallToAction>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };

@@ -10,78 +10,48 @@ import { events, pageLinks, socials } from "../configs/footer.config";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <div className={styles.wrapper}>
-        <motion.div variants={fadeIn("", "spring", "", 1)}>
-          {/* logo */}
-          <Image
-            src="/images/logo-main.png"
-            alt="acetrix logo"
-            width={700}
-            height={700}
-            className={styles.logo}
-          />
-        </motion.div>
-
-        <div className={styles.linksContainer}>
-          <div className={styles.linkWrapper}>
-            {[...pageLinks].map((link, index) => (
-              <motion.a
-                key={index}
-                variants={fadeIn("up", "spring", index * 0.1, 0.75)}
-                href={link.path}
-              >
-                {link.name}
-              </motion.a>
-            ))}
-          </div>
-
-          <div className={styles.linkWrapper}>
-            {[...events].map((link, index) => (
-              <motion.a
-                key={index}
-                variants={fadeIn("up", "spring", index * 0.1, 0.75)}
-                href={link.path}
-              >
-                {link.name}
-              </motion.a>
-            ))}
-          </div>
-
-          <div className={styles.socialLinkContainer}>
-            <p>Our Socials</p>
-
-            <div className={styles.socialWrapper}>
-              {[...socials].splice(0, 2).map((social, index) => (
-                <motion.a
-                  key={index}
-                  variants={fadeIn("up", "spring", 1 * 0.1, 0.75)}
-                  href={social.path}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
-
-            <div className={styles.socialWrapper}>
-              {[...socials].splice(2, 4).map((social, index) => (
-                <motion.a
-                  key={index}
-                  variants={fadeIn("up", "spring", 2 * 0.1, 0.75)}
-                  href={social.path}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <motion.p
-        variants={fadeIn("up", "spring", 0.5, 1)}
-        className={styles.copyright}
+      <motion.div
+        variants={fadeIn("", "spring", 0.3, 0.8)}
+        className={styles.logoContainer}
       >
-        Copyright@ACETRIX2024
+        <Image
+          src="/images/logo-main.png"
+          alt="acetrix logo"
+          width={400}
+          height={400}
+          className={styles.logo}
+        />
+      </motion.div>
+
+      <motion.div variants={fadeIn("up", "spring", 0.5, 0.8)} className={styles.divider} />
+
+      <motion.h3 variants={textVariant(0.6)} className={styles.motto}>
+        THE OFFICIAL GAMING COMMUNITY OF SSTC
+      </motion.h3>
+
+      <motion.div variants={fadeIn("up", "spring", 0.8, 0.8)} className={styles.tagline}>
+        <span>ELEVATE</span>
+        <span>DOMINATE</span>
+        <span className="text-[#c788ff]">NO RESPAWNS</span>
+      </motion.div>
+
+      <motion.div variants={fadeIn("up", "spring", 1.0, 0.8)} className={styles.socials}>
+        {socials.map((social) => (
+          <a
+            key={social.name}
+            href={social.path}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.icon}
+            aria-label={social.name}
+          >
+            {social.icon}
+          </a>
+        ))}
+      </motion.div>
+
+      <motion.p variants={fadeIn("up", "spring", 1.2, 0.8)} className={styles.copyright}>
+        © {new Date().getFullYear()} <span>ACETRIX</span>. ALL RIGHTS RESERVED.
       </motion.p>
     </footer>
   );

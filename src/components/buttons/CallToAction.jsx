@@ -9,6 +9,7 @@ const CallToAction = ({ children, icon, href, type, variants }) => {
       variants={variants}
       href={href}
       target="_blank"
+      rel="noopener noreferrer"
       className="w-full"
     >
       <button className="flex items-center w-full justify-center text-white bg-[#A13CFB] border-2 outline-none border-white rounded-xl px-4 py-2.5 text-lg font-semibold cursor-pointer">

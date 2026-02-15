@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  font-family: var(--font-rajdhani), sans-serif;
+  /* Global Body Font */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading {
+  font-family: var(--font-orbitron), sans-serif;
+  /* Global Heading Font */
+}
+
+* {
+  scrollbar-width: auto;
+  /* scrollbar-color: #c9c9c9 #ffffff; */
+  outline: none !important;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #c9c9c9;
+  border: 3px solid #1f2937;
+  border-radius: 10px;
+}
+
+.acetrix-main {
+  background: url("/images/home-bg.png") no-repeat center center fixed;
+}
+
+.loading-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  /* Ensure it's above other elements */
+  background-color: rgb(5, 7, 14);
+  transition: all 0.3s ease-in-out;
+}

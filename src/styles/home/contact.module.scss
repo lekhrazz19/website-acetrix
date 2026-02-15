@@ -3,31 +3,67 @@
 .contact {
   background-color: #111;
   color: #fff;
-  height: 100vh;
+  min-height: 100vh;
   z-index: 2;
   position: relative;
-  padding: 3rem 0;
+  padding: 4rem 2rem;
   overflow: hidden;
   width: 100%;
+  background-image: radial-gradient(circle at 20% 50%, rgba(199, 136, 255, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(0, 243, 255, 0.08) 0%, transparent 50%);
 
   @include phone() {
     padding: 3rem 1rem;
   }
 
-  .wrapper {
-    width: 90%;
+  .container {
+    max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
 
-    h1 {
-      font-size: 3rem;
+    @include phone() {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    @include tablet() {
+      gap: 2rem;
+    }
+  }
+
+  .contentSection {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .title {
+      font-size: 3.5rem;
       font-weight: 700;
-      line-height: 3.6rem;
-      margin-bottom: 3rem;
+      line-height: 1.2;
+      color: #c788ff;
+      background: linear-gradient(135deg, #c788ff, #a13cfb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
 
       @include phone() {
-        font-size: 2rem;
-        line-height: 2.5rem;
-        margin-bottom: 1rem;
+        font-size: 2.5rem;
+      }
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+
+      @include phone() {
+        font-size: 0.95rem;
       }
     }
 
@@ -36,48 +72,162 @@
       flex-direction: column;
       gap: 1.5rem;
 
-      input,
-      textarea {
-        width: 60%;
-        padding: 1rem;
-        border: 1px solid #c788ff;
-        border-radius: 13px;
-        background-color: transparent;
+      .formGroup {
+        position: relative;
 
-        @include phone() {
+        input,
+        textarea {
           width: 100%;
+          padding: 1rem;
+          border: 2px solid rgba(199, 136, 255, 0.3);
+          border-radius: 8px;
+          background-color: rgba(199, 136, 255, 0.05);
+          color: #fff;
+          font-family: var(--font-rajdhani), sans-serif;
+          font-size: 1rem;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+          }
+
+          &:focus {
+            outline: none;
+            border-color: #00f3ff;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3), inset 0 0 20px rgba(0, 243, 255, 0.1);
+            background-color: rgba(0, 243, 255, 0.05);
+          }
+
+          &:hover {
+            border-color: #c788ff;
+          }
+        }
+
+        textarea {
+          resize: vertical;
+          min-height: 140px;
         }
       }
 
       .submitBTN {
-        width: 230px;
+        margin-top: 1rem;
+        width: fit-content;
+
+        button {
+          position: relative;
+          overflow: hidden;
+        }
       }
     }
   }
 
-  .socials {
-    position: absolute;
-    top: 30%;
-    right: 1.5%;
-    transform: translateY(-30%);
+  .socialSection {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    font-size: 2rem;
+    gap: 2.5rem;
+    align-items: center;
+    justify-content: center;
 
     @include phone() {
-      display: none;
+      align-items: center;
     }
 
-    a {
-      background-color: #a13cfb;
-      padding: 0.7rem;
-      border-radius: 50%;
-      transition: all 0.3s ease-in-out;
+    .socialTitle {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #c788ff;
+      text-align: center;
 
-      &:hover {
-        color: #a13cfb;
-        background-color: #fff;
+      @include phone() {
+        font-size: 1.5rem;
+      }
+    }
+
+    .socialGridContainer {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      justify-items: center;
+
+      @include tablet() {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      @include phone() {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .socialLink {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #c788ff, #a13cfb);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        overflow: hidden;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+          transition: left 0.5s ease;
+          pointer-events: none;
+        }
+
+        &:hover::before {
+          left: 100%;
+        }
+
+        &:hover {
+          box-shadow: 0 15px 40px rgba(199, 136, 255, 0.4),
+                      inset 0 0 20px rgba(0, 243, 255, 0.2);
+          transform: translateY(-8px);
+          background: linear-gradient(135deg, #00f3ff, #c788ff);
+        }
+
+        .icon {
+          font-size: 2.5rem;
+          color: #fff;
+          position: relative;
+          z-index: 2;
+          transition: all 0.3s ease;
+        }
+
+        .socialLabel {
+          position: absolute;
+          bottom: -30px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          white-space: nowrap;
+          transition: all 0.3s ease;
+        }
+
+        &:hover .icon {
+          transform: scale(1.1) rotate(5deg);
+        }
+
+        @include phone() {
+          width: 80px;
+          height: 80px;
+
+          .icon {
+            font-size: 2rem;
+          }
+        }
       }
     }
   }

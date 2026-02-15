@@ -1,16 +1,22 @@
-import "@/styles/globals.scss";
-import { Poppins } from "next/font/google";
+import "@/styles/globals.css";
+import { Orbitron, Rajdhani } from "next/font/google";
 import LoadingAnimation from "../components/Loading";
 import { useEffect, useState } from "react";
 import { ContextProvider } from "@/context";
 
-const poppins = Poppins({
+const orbitron = Orbitron({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-orbitron",
+});
+
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-rajdhani",
 });
 
 function MyApp({ Component, pageProps }) {
-  // const [loading, setLoading] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +29,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <ContextProvider>
-      <div className={poppins.className + " acetrix-main"}>
+      <div className={`${orbitron.variable} ${rajdhani.variable} acetrix-main font-sans`}>
         {loading ? <LoadingAnimation /> : <Component {...pageProps} />}
       </div>
     </ContextProvider>

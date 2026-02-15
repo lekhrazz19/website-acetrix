@@ -1,0 +1,309 @@
+@import "../common/_mixins.scss";
+
+$primary-purple: #bc13fe;
+$primary-cyan: #00f3ff;
+$black: #050505;
+$white: #ffffff;
+
+.battlegrounds {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: $black;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+.bgGrid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to bottom, transparent, black 40%, black 70%, transparent);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.bgGradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba($primary-purple, 0.05), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ── Typography ── */
+.titleContainer {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 10;
+    padding: 0 20px;
+}
+
+.sectionLabel {
+    font-family: var(--font-rajdhani), sans-serif;
+    color: $primary-cyan;
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.title {
+    font-family: var(--font-orbitron), sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: $white;
+    line-height: 1.1;
+    text-transform: uppercase;
+
+    @include phone {
+        font-size: 2.2rem;
+    }
+}
+
+.highlight {
+    color: transparent;
+    -webkit-text-stroke: 1px $primary-purple;
+    text-shadow: 0 0 20px rgba($primary-purple, 0.3);
+}
+
+/* ── Carousel ── */
+.carouselContainer {
+    position: relative;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 5%;
+    overflow: hidden;
+    /* Hide the sliding track */
+}
+
+.track {
+    display: flex;
+    gap: 30px;
+    padding: 40px 0 60px; // Remove extensive horizontal padding, handle via drag constraints
+    width: max-content; // Let it grow
+    cursor: grab;
+    touch-action: pan-y; // Allow vertical scroll, block horizontal for drag
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.spacer {
+    min-width: 50px;
+}
+
+/* ── Poster Card ── */
+.card {
+    position: relative;
+    min-width: 320px; // Large fixed width
+    height: 480px; // Portrait aspect ratio (2:3)
+    border-radius: 20px;
+    background: #111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+    &:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.8),
+            0 0 30px rgba(var(--card-color), 0.3);
+        border-color: var(--card-color);
+        z-index: 5;
+    }
+
+    @include phone {
+        min-width: 280px;
+        height: 400px;
+    }
+}
+
+.comingSoonCard {
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    background: linear-gradient(145deg, #151515, #0a0a0a);
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .comingSoonPlaceholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .comingSoonText {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: center;
+        animation: pulseText 3s infinite ease-in-out;
+    }
+}
+
+@keyframes pulseText {
+
+    0%,
+    100% {
+        opacity: 0.4;
+        text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+
+    50% {
+        opacity: 0.8;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+}
+
+.imageContainer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.posterImage {
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.card:hover .posterImage {
+    transform: scale(1.1);
+}
+
+.posterOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            transparent 0%,
+            rgba(0, 0, 0, 0.2) 50%,
+            rgba(0, 0, 0, 0.95) 100%);
+    z-index: 1;
+}
+
+/* ── Card Content ── */
+.cardContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px;
+    z-index: 2;
+    transform: translateY(0);
+    transition: transform 0.4s ease;
+}
+
+.card:hover .cardContent {
+    transform: translateY(-5px);
+}
+
+.cardTitle {
+    font-family: var(--font-orbitron), sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: $white;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+.cardDesc {
+    font-family: var(--font-rajdhani), sans-serif;
+    font-size: 1rem;
+    color: rgba($white, 0.8);
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.activeBar {
+    width: 40px;
+    height: 4px;
+    background: var(--card-color);
+    margin-top: 12px;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.card:hover .activeBar {
+    width: 100%;
+}
+
+/* ── Hover Glow ── */
+.hoverGlow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center,
+            rgba(var(--card-color), 0.2),
+            transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.card:hover .hoverGlow {
+    opacity: 1;
+}
+
+/* ── Navigation ── */
+.navBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: $white;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: $primary-purple;
+        border-color: $primary-purple;
+        box-shadow: 0 0 20px rgba($primary-purple, 0.5);
+    }
+}
+
+.prevBtn {
+    left: 20px;
+
+    @include phone {
+        display: none; // Hide on mobile (swipe is natural)
+    }
+}
+
+.nextBtn {
+    right: 20px;
+
+    @include phone {
+        display: none;
+    }
+}

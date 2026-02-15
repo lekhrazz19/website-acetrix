@@ -75,3 +75,53 @@ body::-webkit-scrollbar-track {
   background-color: rgb(5, 7, 14);
   transition: all 0.3s ease-in-out;
 }
+
+/* ============================================
+   MOBILE PERFORMANCE OVERRIDES
+   Kill heavy effects on mobile/touch devices
+   ============================================ */
+@media (max-width: 768px),
+(hover: none) {
+
+  /* Disable ALL CSS animations site-wide on mobile */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01s !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  /* Kill heavy blur filters */
+  [style*="blur"],
+  .animatedBlob,
+  .glowingLight,
+  .glowLayer {
+    filter: none !important;
+    -webkit-filter: none !important;
+  }
+
+  /* Remove backdrop-filter (extremely expensive on mobile) */
+  * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Remove heavy box-shadows */
+  * {
+    box-shadow: none !important;
+  }
+
+  /* GPU-accelerate transforms */
+  [style*="transform"],
+  .group {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Reduce image quality for faster rendering */
+  img {
+    image-rendering: auto;
+  }
+}
